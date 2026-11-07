@@ -1,30 +1,32 @@
-# PlanTwin
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="PlanTwin: catch PostgreSQL query-plan regressions before merge" width="100%">
+</p>
+
+<p align="center">
+  <a href="https://github.com/raunaksahahere/planTwin/actions/workflows/ci.yml"><img src="https://github.com/raunaksahahere/planTwin/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <a href="https://github.com/raunaksahahere/planTwin/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/release-v1.0.0-7c3aed" alt="Release v1.0.0"></a>
+  <img src="https://img.shields.io/badge/PostgreSQL-18-336791?logo=postgresql&logoColor=white" alt="PostgreSQL 18">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/CLI%20%26%20Action-Apache--2.0-blue" alt="CLI and Action license: Apache-2.0"></a>
+  <a href="ext/plantwin/LICENSE"><img src="https://img.shields.io/badge/extension-PostgreSQL%20License-64748b" alt="Extension license: PostgreSQL License"></a>
+</p>
+
+<p align="center">
+  <a href="#quick-start"><b>Quickstart</b></a> ·
+  <a href="#how-it-works"><b>How it works</b></a> ·
+  <a href="#using-plantwin"><b>Commands</b></a> ·
+  <a href="#evidence"><b>Evidence</b></a> ·
+  <a href="#privacy"><b>Privacy</b></a> ·
+  <a href="#documentation"><b>Documentation</b></a>
+</p>
+
+---
 
 **Catch PostgreSQL query-plan regressions in pull requests, using production planner statistics and no production rows.**
 
 PlanTwin shows how a migration or query change alters the plans PostgreSQL would choose in production, before the change is merged. It runs in CI against an empty PostgreSQL 18 database that has been given production's statistics, so the planner reasons about production-sized tables without any production data leaving the replica.
 
+> [!NOTE]
 > **Status: v1.0.0 released.** From 1.0.0, the CLI flags, exit codes, configuration keys and the JSON report's `schema_version` 1 stay compatible within 1.x. See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the promise and what it excludes, and [docs/STATUS.md](docs/STATUS.md) for the release gates, what has run, and what has not been verified (for example, a real production replica).
-
----
-
-## Contents
-
-- [Why](#why)
-- [How it works](#how-it-works)
-- [Quick start](#quick-start)
-- [Using PlanTwin](#using-plantwin)
-- [Example output](#example-output)
-- [Evidence](#evidence)
-- [Privacy](#privacy)
-- [Limitations](#limitations)
-- [Documentation](#documentation)
-- [Development](#development)
-- [Prior art](#prior-art)
-- [Contributing and security](#contributing-and-security)
-- [License](#license)
-
----
 
 ## Why
 
@@ -104,7 +106,7 @@ Output formats for `check`: `--format md` (PR comment, default), `json` (with `s
 
 Real output of `plantwin demo`, from the fresh-clone check:
 
-```
+```markdown
 ## PlanTwin: HEAD~1 → HEAD
 
 **Result: failing.** 1 error(s), 0 warning(s), 1 info.
@@ -156,9 +158,10 @@ Details, GRANTs and measured trade-offs: [docs/privacy-and-redaction.md](docs/pr
 
 ## Limitations
 
-PlanTwin predicts plan changes from statistics. It does not execute your queries against production data, and it does not measure I/O, locks or concurrency. Extended statistics are not restored. Custom plans for specific parameter values are not compared. Only PostgreSQL 18 is supported, in every 1.x release.
-
-Read [docs/limitations.md](docs/limitations.md) before relying on a clean report.
+> [!IMPORTANT]
+> PlanTwin predicts plan changes from statistics. It does not execute your queries against production data, and it does not measure I/O, locks or concurrency. Extended statistics are not restored. Custom plans for specific parameter values are not compared. Only PostgreSQL 18 is supported, in every 1.x release.
+>
+> Read [docs/limitations.md](docs/limitations.md) before relying on a clean report.
 
 ## Documentation
 
@@ -176,6 +179,9 @@ Read [docs/limitations.md](docs/limitations.md) before relying on a clean report
 
 ## Development
 
+<details>
+<summary><b>Build, test and repository layout</b></summary>
+
 ```bash
 make check             # gofmt, go vet, unit and golden tests (Go runs in a pinned container)
 make test-ext          # pg_regress tests for the extension (Dockerfile test stage)
@@ -185,6 +191,8 @@ make test-integration  # real Docker: demo, redaction, least-privilege role
 Layout: `ext/plantwin` (C extension), `cmd/plantwin` (CLI), `internal/` (packages), `bench/` (benchmarks and their results), `examples/`, `docs/`, `.github/`, `action.yml`, `action/`.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+</details>
 
 ## Prior art
 

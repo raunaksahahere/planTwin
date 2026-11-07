@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 340" width="1280" height="340" role="img" aria-labelledby="title desc">
+  <title id="title">PlanTwin</title>
+  <desc id="desc">Catch PostgreSQL query-plan regressions before merge. Production statistics are imported into empty CI twins, without production rows. An illustrative plan diff shows index use lost after a change.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1222"/>
+      <stop offset="0.55" stop-color="#141a3a"/>
+      <stop offset="1" stop-color="#1d1146"/>
+    </linearGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#a5b4fc"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.045"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="340" rx="24" fill="url(#bg)"/>
+  <rect width="1280" height="340" rx="24" fill="url(#grid)"/>
+
+  <g font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif">
+    <text x="72" y="130" font-size="96" font-weight="800" letter-spacing="-4" fill="url(#word)">planTwin</text>
+    <text x="76" y="190" font-size="25" fill="#cbd5e1">Catch query-plan regressions before merge.</text>
+    <text x="76" y="224" font-size="18" fill="#94a3b8">Production statistics. Empty CI twins. No production rows.</text>
+    <g font-size="13" font-weight="700" letter-spacing="0.8">
+      <rect x="76" y="254" width="160" height="34" rx="17" fill="#22d3ee" fill-opacity="0.12" stroke="#22d3ee" stroke-opacity="0.7"/>
+      <text x="156" y="276" text-anchor="middle" fill="#67e8f9">POSTGRESQL 18</text>
+      <rect x="248" y="254" width="138" height="34" rx="17" fill="#818cf8" fill-opacity="0.14" stroke="#818cf8" stroke-opacity="0.8"/>
+      <text x="317" y="276" text-anchor="middle" fill="#c7d2fe">SIGNED STATS</text>
+      <rect x="398" y="254" width="108" height="34" rx="17" fill="#a78bfa" fill-opacity="0.14" stroke="#a78bfa" stroke-opacity="0.8"/>
+      <text x="452" y="276" text-anchor="middle" fill="#ddd6fe">CI GATES</text>
+    </g>
+
+    <rect x="744" y="52" width="464" height="236" rx="14" fill="#0b1222" fill-opacity="0.8" stroke="#475569" stroke-opacity="0.65"/>
+    <path d="M744 94H1208" stroke="#334155"/>
+    <circle cx="766" cy="73" r="4" fill="#f87171"/>
+    <circle cx="782" cy="73" r="4" fill="#fbbf24"/>
+    <circle cx="798" cy="73" r="4" fill="#4ade80"/>
+    <text x="1186" y="78" font-size="12" letter-spacing="1.5" fill="#94a3b8" text-anchor="end">PLAN DIFF</text>
+    <path d="M976 111V220" stroke="#334155" stroke-dasharray="4 5"/>
+    <text x="768" y="122" font-size="12" font-weight="700" letter-spacing="1.6" fill="#4ade80">BASE</text>
+    <text x="998" y="122" font-size="12" font-weight="700" letter-spacing="1.6" fill="#fbbf24">HEAD</text>
+  </g>
+
+  <g font-family="'SFMono-Regular', Consolas, 'Liberation Mono', monospace" font-size="14">
+    <rect x="768" y="139" width="184" height="32" rx="6" fill="#22c55e" fill-opacity="0.09" stroke="#22c55e" stroke-opacity="0.45"/>
+    <text x="780" y="160" fill="#d1fae5">Bitmap Heap Scan</text>
+    <path d="M784 171V193H798" fill="none" stroke="#4ade80" stroke-opacity="0.65" stroke-width="1.5"/>
+    <text x="805" y="198" fill="#86efac">Bitmap Index Scan</text>
+    <text x="805" y="219" font-size="11" fill="#64748b">orders_customer_idx</text>
+    <rect x="998" y="139" width="184" height="32" rx="6" fill="#f59e0b" fill-opacity="0.09" stroke="#f59e0b" stroke-opacity="0.45"/>
+    <text x="1010" y="160" fill="#fef3c7">Gather</text>
+    <path d="M1014 171V193H1028" fill="none" stroke="#fbbf24" stroke-opacity="0.65" stroke-width="1.5"/>
+    <text x="1035" y="198" fill="#fcd34d">Seq Scan</text>
+    <text x="1035" y="219" font-size="11" fill="#64748b">orders</text>
+  </g>
+  <path d="M768 237H1184" stroke="#334155"/>
+  <g font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif">
+    <circle cx="778" cy="260" r="8" fill="#f59e0b" fill-opacity="0.16" stroke="#fbbf24"/>
+    <text x="778" y="264" font-size="11" font-weight="700" text-anchor="middle" fill="#fbbf24">!</text>
+    <text x="796" y="265" font-size="16" font-weight="600" fill="#fcd34d">Index use lost</text>
+    <text x="1184" y="265" font-size="12" text-anchor="end" fill="#64748b">illustrative diff</text>
+  </g>
+</svg>
